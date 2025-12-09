@@ -171,7 +171,7 @@ public actor SharedAutoUpdateManager {
 
         // Cache miss - recompute from protobuf
         // Check for and clear stale running flags
-        await checkAndClearStaleRunningFlag()
+        let _ = await checkAndClearStaleRunningFlag()
 
         let interval = await getAutoUpdateIntervalHours()
         let nowTimestamp = now.timeIntervalSince1970
@@ -464,7 +464,7 @@ public actor SharedAutoUpdateManager {
     private func loadFilterListsFromProtobuf() async -> ([FilterList], [FilterList]) {
         // Wait for ProtobufDataManager to finish loading data
         let dataManager = await MainActor.run { ProtobufDataManager.shared }
-        while await MainActor.run { dataManager.isLoading } {
+		while await MainActor.run(body: { dataManager.isLoading }) {
             try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
         }
 

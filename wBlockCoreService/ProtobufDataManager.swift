@@ -184,7 +184,7 @@ public class ProtobufDataManager: ObservableObject {
         updatedData.autoUpdate.isRunning = value
         updatedData.autoUpdate.runningSinceTimestamp = value ? Int64(Date().timeIntervalSince1970) : 0
         appData = updatedData
-        await saveData()
+        saveData()
     }
 
     /// Timestamp when auto-update started running
@@ -206,7 +206,7 @@ public class ProtobufDataManager: ObservableObject {
             updatedData.autoUpdate.filterEtags.removeValue(forKey: uuid)
         }
         appData = updatedData
-        await saveData()
+        saveData()
     }
 
     /// Get Last-Modified header for a specific filter UUID
@@ -223,7 +223,7 @@ public class ProtobufDataManager: ObservableObject {
             updatedData.autoUpdate.filterLastModified.removeValue(forKey: uuid)
         }
         appData = updatedData
-        await saveData()
+        saveData()
     }
 
     /// Indicates if userscripts initial setup has been completed
@@ -262,7 +262,7 @@ public class ProtobufDataManager: ObservableObject {
         updatedData.extensionData.tabBlockedRequests[tabId] = tabData
         updatedData.extensionData.lastUpdated = Int64(Date().timeIntervalSince1970)
         appData = updatedData
-        await saveData()
+        saveData()
     }
 
     @MainActor
@@ -271,7 +271,7 @@ public class ProtobufDataManager: ObservableObject {
         updatedData.extensionData.tabBlockedRequests.removeValue(forKey: tabId)
         updatedData.extensionData.lastUpdated = Int64(Date().timeIntervalSince1970)
         appData = updatedData
-        await saveData()
+        saveData()
     }
 
     @MainActor
@@ -284,7 +284,7 @@ public class ProtobufDataManager: ObservableObject {
         updatedData.extensionData.tabBlockedRequests[tabId] = tabData
         updatedData.extensionData.lastUpdated = Int64(Date().timeIntervalSince1970)
         appData = updatedData
-        await saveData()
+        saveData()
     }
 
     @MainActor
@@ -296,7 +296,7 @@ public class ProtobufDataManager: ObservableObject {
         }
         updatedData.extensionData.lastUpdated = Int64(Date().timeIntervalSince1970)
         appData = updatedData
-        await saveData()
+        saveData()
     }
 
     /// Get all tab IDs that have data
@@ -317,7 +317,7 @@ public class ProtobufDataManager: ObservableObject {
     @Published public private(set) var lastError: Error?
     
     // MARK: - Private Properties
-    private let logger = Logger(subsystem: "com.skula.wBlock", category: "ProtobufDataManager")
+    private let logger = Logger(subsystem: "com.orlproducts.AdsBlocker", category: "ProtobufDataManager")
     private let fileManager = FileManager.default
     private let dataFileName = "wblock_data.pb"
     private let backupFileName = "wblock_data_backup.pb"
@@ -355,7 +355,7 @@ public class ProtobufDataManager: ObservableObject {
         var updatedData = appData
         block(&updatedData)
         appData = updatedData
-        await saveData()
+        saveData()
     }
     
     // MARK: - Data Directory Setup
@@ -513,14 +513,14 @@ public class ProtobufDataManager: ObservableObject {
             self.appData = defaultData
         }
 
-        await saveData()
+        saveData()
         logger.info("✅ Created default data")
     }
     
     // MARK: - Data Saving (debounced)
     private var pendingSaveWorkItem: DispatchWorkItem?
     private let saveDebounceInterval: TimeInterval = 0.5
-    private let ioQueue = DispatchQueue(label: "com.skula.wBlock.dataIO", qos: .utility)
+    private let ioQueue = DispatchQueue(label: "com.orlproducts.AdsBlocker.dataIO", qos: .utility)
     private var lastSavedData: Data?
 
     public func saveData() {
@@ -636,7 +636,7 @@ public class ProtobufDataManager: ObservableObject {
         }
 
         // Save once after all modifications
-        await saveData()
+        saveData()
     }
 
     /// Sanitizes text by replacing Apple-flagged terminology using pre-compiled regexes
@@ -752,7 +752,7 @@ public class ProtobufDataManager: ObservableObject {
             self.appData = migratedData
         }
 
-        await saveData()
+        saveData()
         logger.info("✅ Migration completed successfully")
     }
     

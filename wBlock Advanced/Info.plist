@@ -6,6 +6,10 @@
 	<string>$(AppIdentifierPrefix)</string>
 	<key>NSExtension</key>
 	<dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.Safari.extension</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>$(PRODUCT_MODULE_NAME).SafariExtensionHandler</string>
 		<key>SFSafariAssociatedContentBlockers</key>
 		<array>
 			<string>skula.wBlock.wBlock-Ads</string>
@@ -14,10 +18,6 @@
 			<string>skula.wBlock.wBlock-Custom</string>
 			<string>skula.wBlock.wBlock-Foreign</string>
 		</array>
-		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.Safari.extension</string>
-		<key>NSExtensionPrincipalClass</key>
-		<string>$(PRODUCT_MODULE_NAME).SafariExtensionHandler</string>
 		<key>SFSafariContentScript</key>
 		<array>
 			<dict>

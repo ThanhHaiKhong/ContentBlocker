@@ -26,9 +26,9 @@ public class UserScriptManager: ObservableObject {
     
     private let userScriptsKey = "userScripts"
     private let initialSetupCompletedKey = "userScriptsInitialSetupCompleted"
-    private let sharedContainerIdentifier = "group.skula.wBlock"
+    private let sharedContainerIdentifier = "group.C77T3ALUS5.com.orlproducts.vpnpro"
     private let dataManager = ProtobufDataManager.shared
-    private let logger = Logger(subsystem: "com.skula.wBlock", category: "UserScriptManager")
+    private let logger = Logger(subsystem: "com.orlproducts.AdsBlocker", category: "UserScriptManager")
     private var cancellables = Set<AnyCancellable>()
     
     // Configured URLSession for better resource management

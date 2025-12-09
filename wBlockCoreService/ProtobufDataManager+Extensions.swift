@@ -30,7 +30,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
 
     // MARK: - Data Migration
@@ -50,7 +50,7 @@ extension ProtobufDataManager {
             await MainActor.run {
                 appData = updatedData
             }
-            await saveData()
+            saveData()
         }
     }
 
@@ -111,7 +111,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
     
     public func removeFilterList(withId id: UUID) async {
@@ -121,7 +121,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
     
     public func updateFilterListSelection(_ filterLists: [FilterList]) async {
@@ -137,7 +137,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
     
     // MARK: - Userscripts
@@ -218,7 +218,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
     
     public func removeUserScript(withId id: UUID) async {
@@ -228,7 +228,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
     
     // MARK: - Whitelist Management
@@ -245,7 +245,7 @@ extension ProtobufDataManager {
             await MainActor.run {
                 appData = updatedData
             }
-            await saveData()
+            saveData()
         }
     }
     
@@ -257,7 +257,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
     
     public func setWhitelistedDomains(_ domains: [String]) async {
@@ -268,7 +268,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
     
     // MARK: - App Settings
@@ -294,7 +294,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
     
     // MARK: - Rule Count Management
@@ -325,7 +325,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
     
     // MARK: - Performance Data
@@ -381,7 +381,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
     
     // MARK: - Helper Methods
@@ -461,7 +461,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
     
     public func updateUserScripts(_ userScripts: [UserScript]) async {
@@ -495,7 +495,7 @@ extension ProtobufDataManager {
         await MainActor.run {
             appData = updatedData
         }
-        await saveData()
+        saveData()
     }
 
     // MARK: - Excluded Default UserScript URLs
@@ -510,7 +510,7 @@ extension ProtobufDataManager {
             if !updatedData.settings.excludedDefaultUserscriptUrls.contains(url) {
                 updatedData.settings.excludedDefaultUserscriptUrls.append(url)
                 appData = updatedData
-                await saveData()
+                saveData()
             }
         }
     }
@@ -520,7 +520,7 @@ extension ProtobufDataManager {
             var updatedData = appData
             updatedData.settings.excludedDefaultUserscriptUrls.removeAll { $0 == url }
             appData = updatedData
-            await saveData()
+            saveData()
         }
     }
 
@@ -535,7 +535,7 @@ extension ProtobufDataManager {
             var updatedData = appData
             updatedData.settings.userscriptShowEnabledOnly = value
             appData = updatedData
-            await saveData()
+            saveData()
         }
     }
 }
